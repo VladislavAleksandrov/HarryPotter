@@ -1,12 +1,12 @@
 'use strict';
 let persons = document.createElement('section');
-
+const clear = document.querySelector('.clear');
 persons.classList.add('characters', 'container');
-const getFromData = (data) => {
-	persons.innerHTML = '';
-	data.forEach(pers => {
 
-		let image = pers.image;
+const finalRender = (data) => {
+	data.forEach(person => {
+
+		let image = person.image;
 
 
 		let imgBlock = document.createElement('img');
@@ -17,12 +17,12 @@ const getFromData = (data) => {
 		let imgBox = document.createElement('div');
 		imgBox.classList.add('box');
 
-		let name = pers.name;
-		let actor = pers.actor;
-		let gender = pers.gender;
-		let house = pers.house;
-		let wandCore = pers.wand.core;
-		let alive = (pers.alive) ? 'yes' : 'no';
+		let name = person.name;
+		let actor = person.actor;
+		let gender = person.gender;
+		let house = person.house;
+		let wandCore = person.wand.core;
+		let alive = (person.alive) ? 'yes' : 'no';
 
 		let characterName = document.createElement('div');
 		characterName.classList.add('character__name');
@@ -41,7 +41,7 @@ const getFromData = (data) => {
 		let editButton = document.createElement('button');
 		editButton.classList.add('editButton');
 		let editImg = document.createElement('img');
-		editImg.setAttribute('src', '../img/editButton.png');
+		editImg.setAttribute('src', 'img/editButton.png');
 		editImg.classList.add('editImg');
 
 		let template = document.getElementById('temp');
@@ -85,7 +85,53 @@ const getFromData = (data) => {
 		//
 
 	})
+}
+
+const render = (data) => {
+
+	let dataClon = JSON.parse(JSON.stringify(data));
+// let dataClon = [... data];
+// 	let dataClon = data.slice();
+// dataClon[0].actor = 'faafa';
+	console.log(data);
+	console.log('local', localStorage.length)
+	console.log('render')
+	persons.innerHTML = '';
+
+	if (localStorage.getItem('localData')) {
+
+		console.log('check')
+		clear.classList.remove('display-none');
+		let newData = JSON.parse(localStorage.getItem('localData'));
+		for (name in newData) {
+			//	console.log('change', newData[name])
+			let index = dataClon.findIndex(obj => obj.name === newData[name].name);
+			//	console.log(newData[name].name);
+			//	console.log('index', index);
+			//	console.log(dataClon[0].name)
+			if (index !== -1) {
+				dataClon[index].actor = newData[name].actor;
+				dataClon[index].gender = newData[name].gender;
+				//dataClon[index].house = newData[name].house;
+				dataClon[index].wand.core = newData[name]['wand core'];
+				dataClon[index].alive = newData[name].alive;
+			}
+			//		console.log('test', data[index])
+			//console.log('f', data);
+		}
+		//	console.log('data change', data);
+	}
+
+	if (localStorage.getItem('localData')) {
+		console.log('dataClon');
+		console.log(dataClon)
+		finalRender(dataClon);
+	} else {
+		finalRender(data);
+		console.log('data');
+		console.log(data);
+	}
 
 	document.body.append(persons);
 }
-getFromData(data);
+render(data);

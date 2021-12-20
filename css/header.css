@@ -1,0 +1,43 @@
+.header {
+	margin: 64px 40px 0;
+	width: 320px;
+	//position: relative;
+}
+
+.header__title {
+	font-weight: bold;
+	font-size: 52px;
+	line-height: calc(63 / 52);
+	margin-top: 14px;
+}
+
+.header__text {
+
+}
+
+.clear {
+	position: static;
+
+	left: 0px;
+
+	top: 30px;
+
+}
+.clear__button {
+//border: none;
+	background: white;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+@media (min-width: 767px) {
+	.header {
+		width: 688px;
+	}
+}
+
+@media (min-width: 769px) {
+	.header {
+		margin: 64px auto 0;
+	}
+}
