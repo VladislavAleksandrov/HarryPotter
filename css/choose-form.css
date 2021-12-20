@@ -48,7 +48,7 @@ input::-moz-placeholder {
 	right: 16px;
 	height: 6px;
 	width: 10px;
-	background: url("img/chevron.png");
+	background: url("../img/chevron.png");
 }
 
 .choose-form__schools {

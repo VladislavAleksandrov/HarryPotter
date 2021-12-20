@@ -1,12 +1,11 @@
 const editButton = document.querySelector('.editButton');
 let localData = JSON.parse(localStorage.localData || '{}');
 const clearButton = document.querySelector('.clear__button');
+
 clearButton.addEventListener('click', () => {
-	localStorage.clear()
+	localStorage.removeItem('localData');
 	clear.classList.add('display-none');
-	//setTimeout(render, 500, data)
 	render(data);
-//	console.log('cleared')
 });
 
 /*const checkLocalStorage = () => {
@@ -20,31 +19,28 @@ persons.addEventListener('click', (event) => {
 	let characterBlock = event.target.closest('.character__block');
 	let button = event.target.closest('.editButton')
 	let characterContent = characterBlock.querySelector('.characters__content');
-	let info__edit = characterContent.querySelectorAll('.info__edit');
-
+	let infoEdit = characterContent.querySelectorAll('.info__edit');
 
 	const compare = (obj1, obj2) => JSON.stringify(obj1) === JSON.stringify(obj2);
 
-
 	const finishEdit = () => {
-		// console.log('test');
-		if (info__edit[0].getAttribute('contenteditable') === 'true') {
+		if (infoEdit[0].getAttribute('contenteditable') === 'true') {
 			button.click() // функция должна нажимать на кнопку только в случае, если нам нужно убрать атрибут contenteditable
 		}
 		characterBlock.removeEventListener('pointerleave', finishEdit);
 	}
 
-// проверяем нажали ли мы
+// проверяем нажатие на кнопку
+
 	if (button) {
-		if (info__edit[0].getAttribute('contenteditable') === 'true') { // уже есть атрибут
-			//	console.log('remove')
-			//	console.log(event.eventPhase)
-			// characterBlock.removeEventListener('pointerleave', finishEdit);
+		//если уже можно было редактировать
 
-
+		if (infoEdit[0].getAttribute('contenteditable') === 'true') {
+			//меняем картинку внутри кнопки на кнопку редактирования
 			characterContent.querySelector('.editImg').src = 'img/editButton.png'
-
-			info__edit.forEach(el => el.setAttribute('contenteditable', 'false'));
+//убираем возможность редактирования
+			infoEdit.forEach(el => el.setAttribute('contenteditable', 'false'));
+// создадим объект для сравнения
 			let objChanged = {
 				'name': characterContent.querySelector('.character__name').textContent,
 				'actor': characterContent.querySelector('.actor').textContent,
@@ -53,33 +49,23 @@ persons.addEventListener('click', (event) => {
 				'wand core': characterContent.querySelector('.wand').textContent,
 				'alive': characterContent.querySelector('.alive').textContent,
 			}
-			//	localStorage.setItem('changed', JSON.stringify(objChanged));
-			//		console.log(objChanged);
+// получим объект из локал сторэдж
 			let objBase = JSON.parse(localStorage.getItem('base'));
-			// очистим локал стор
+			// очистим локал сторэдж
 			localStorage.removeItem('base');
 			//теперь сравним два объекта,
-			if (compare(objBase, objChanged)) {
-				//		console.log('равны');
-			} else {
-				//		console.log('не равны');
+			if (!compare(objBase, objChanged)) {
 				localData[objChanged.name] = objChanged;
 				localStorage.localData = JSON.stringify(localData);
 			}
 
-			// console.log(localStorage.length, 'первый кейс')
-			if (localStorage.length) {
+			if (localStorage.localData) {
 				clear.classList.remove('display-none')
 			}
-
 		} else {
-
-
-			//	console.log('add')
-			//	console.log(event.eventPhase)
+// добавляем возможность закрыть, просто убрав мышь
 			characterBlock.addEventListener('pointerleave', finishEdit, {once: true});
-			// console.log('remove')
-			// characterBlock.removeEventListener('pointerleave', finishEdit);
+// объект, который потом добавим в локал сторэдж, для последующего сравнения
 			let objBase = {
 				'name': characterContent.querySelector('.character__name').textContent,
 				'actor': characterContent.querySelector('.actor').textContent,
@@ -89,18 +75,14 @@ persons.addEventListener('click', (event) => {
 				'alive': characterContent.querySelector('.alive').textContent,
 			}
 			localStorage.setItem('base', JSON.stringify(objBase));
-			// console.log(objBase);
-
+			//замена картинки на ОК
 			characterContent.querySelector('.editImg').src = 'img/ok.png';
-			info__edit.forEach(el => el.setAttribute('contenteditable', 'true'));
 
-			// console.log(localStorage.length, 'второй кейс')
-			if (localStorage.length > 1) {
+			infoEdit.forEach(el => el.setAttribute('contenteditable', 'true'));
+
+			if (localStorage.localData) {
 				clear.classList.remove('display-none')
 			}
-
 		}
-
 	}
-
 })

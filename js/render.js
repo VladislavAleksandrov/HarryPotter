@@ -88,27 +88,15 @@ const finalRender = (data) => {
 }
 
 const render = (data) => {
-
 	let dataClon = JSON.parse(JSON.stringify(data));
-// let dataClon = [... data];
-// 	let dataClon = data.slice();
-// dataClon[0].actor = 'faafa';
-	console.log(data);
-	console.log('local', localStorage.length)
-	console.log('render')
+
 	persons.innerHTML = '';
 
 	if (localStorage.getItem('localData')) {
-
-		console.log('check')
 		clear.classList.remove('display-none');
 		let newData = JSON.parse(localStorage.getItem('localData'));
 		for (name in newData) {
-			//	console.log('change', newData[name])
 			let index = dataClon.findIndex(obj => obj.name === newData[name].name);
-			//	console.log(newData[name].name);
-			//	console.log('index', index);
-			//	console.log(dataClon[0].name)
 			if (index !== -1) {
 				dataClon[index].actor = newData[name].actor;
 				dataClon[index].gender = newData[name].gender;
@@ -116,22 +104,15 @@ const render = (data) => {
 				dataClon[index].wand.core = newData[name]['wand core'];
 				dataClon[index].alive = newData[name].alive;
 			}
-			//		console.log('test', data[index])
-			//console.log('f', data);
 		}
-		//	console.log('data change', data);
 	}
 
 	if (localStorage.getItem('localData')) {
-		console.log('dataClon');
-		console.log(dataClon)
 		finalRender(dataClon);
 	} else {
 		finalRender(data);
-		console.log('data');
-		console.log(data);
 	}
 
 	document.body.append(persons);
 }
-render(data);
+// render(data)
