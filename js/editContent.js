@@ -5,7 +5,7 @@ const clearButton = document.querySelector('.clear__button');
 clearButton.addEventListener('click', () => {
 	localStorage.removeItem('localData');
 	clear.classList.add('display-none');
-	render(data);
+	searchFilter(input.value, selector.value);
 });
 
 /*const checkLocalStorage = () => {

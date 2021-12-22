@@ -6,7 +6,7 @@ input.value = localStorage.getItem('input')
 // localStorage.input = input.value
 selector.addEventListener('change', () => {
 localStorage.selector = selector.value;
-	return searchFilter(localStorage.input, localStorage.selector);
+	return searchFilter(input.value, selector.value);
 })
 
 
@@ -22,7 +22,7 @@ const searchFilter = (name, school) => {
 
 input.addEventListener('input', () => {
 	localStorage.input = input.value
-	searchFilter(localStorage.input, localStorage.selector);
+	searchFilter(input.value, selector.value);
 });
 
 searchFilter(input.value, selector.value)

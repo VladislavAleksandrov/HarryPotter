@@ -2,12 +2,12 @@
 	margin-bottom: 40px;
 }
 
-.characters__block {
+.character__block {
 	background: #FFFFFF;
 	border: 1px solid #DEE2E6;
 	border-radius: 4px;
-	width: 250px;
-	min-width: 220px;
+	max-width: 320px;
+
 	margin-top: 22px;
 }
 .editButton {
@@ -25,11 +25,12 @@ display: block;
 	overflow: hidden;
 }
 .characters__image {
-	width: 320px;
+	width: 100%;
 	/*transform: translateY(-27%);*/
 	/*height: 192px;*/
 	/*position: absolute;*/
 	object-fit:cover;
+
 }
 
 .characters__content {
@@ -71,10 +72,8 @@ display: block;
 }
 
 @media (min-width: 414px) {
-	.characters__block {
-		width: 334px;
-		margin-left: auto;
-		margin-right: auto;
+	.character__block {
+		max-width: 334px;
 	}
 
 }
@@ -92,13 +91,13 @@ display: block;
 	}
 
 	.characters__block {
-		width: 334px;
+		max-width: 334px;
 		margin-top: 0;
 		margin-left: 0;
 	}
 
 	.characters__image {
-		width: 100%;
+		width: 334px;
 		/*height: 192px;*/
 	}
 
