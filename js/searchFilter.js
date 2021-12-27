@@ -1,5 +1,7 @@
-const input = document.querySelector('#name');
-const selector = document.querySelector('#test');
+import {data} from "./script.js";
+import {render} from "./render.js";
+export const input = document.querySelector('#name');
+export const selector = document.querySelector('#test');
 selector.value = localStorage.getItem('selector')
 input.value = localStorage.getItem('input')
 // localStorage.selector = selector.value;
@@ -10,7 +12,7 @@ localStorage.selector = selector.value;
 })
 
 
-const searchFilter = (name, school) => {
+export const searchFilter = (name, school) => {
 
 	if (school === 'No') {
 		return render(data.filter(obj =>
@@ -24,5 +26,3 @@ input.addEventListener('input', () => {
 	localStorage.input = input.value
 	searchFilter(input.value, selector.value);
 });
-
-searchFilter(input.value, selector.value)

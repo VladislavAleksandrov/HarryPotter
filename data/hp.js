@@ -1,4 +1,4 @@
-let data = [
+export let data = [
 	{
 		"name": "Harry Potter",
 		"species": "human",
